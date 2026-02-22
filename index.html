@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Structural Linguistics</title>
+<style>
+body{
+    margin:0;
+    font-family: Arial;
+    text-align:center;
+}
+
+/* الصفحة الأولى */
+#page1{
+    background:linear-gradient(pink,#ff69b4);
+    height:100vh;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    color:white;
+}
+
+h1{
+    font-size:70px;
+    text-shadow:6px 6px 20px black;
+    font-style:italic;
+    opacity:0;
+    animation:fadeIn 2s forwards;
+}
+
+/* أسماء الطالبات */
+.names{
+    font-size:40px;
+    font-weight:bold; /* جعل الخط عريض */
+    text-shadow:2px 2px 6px black;
+    margin-top:15px;
+    opacity:0;
+    animation:fadeIn 2s forwards; /* تظهر مباشرة مع العنوان */
+}
+
+/* زر الصفحة الأولى */
+#page1 button{
+    padding:17px 35px;
+    font-size:40px;
+    margin-top:30px;
+    cursor:pointer;
+    border:none;
+    border-radius:10px;
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+}
+
+/* الصفحات الثانية والثالثة */
+.page{
+    display:none;
+    padding:30px;
+    background:#ffe6f0;
+    min-height:100vh;
+}
+
+/* ترتيب أزرار Back و Next */
+.button-container{
+    display:flex;
+    justify-content:space-between; /* Back على اليسار و Next على اليمين */
+    margin-top:20px;
+}
+
+/* أزرار التمرين */
+.exercise-button{
+    padding:12px 25px;
+    font-size:18px;
+    margin:10px;
+    cursor:pointer;
+    border:none;
+    border-radius:8px;
+    box-shadow: 2px 2px 6px rgba(0,0,0,0.3);
+}
+
+.confetti{
+    position:fixed;
+    top:-10px;
+    font-size:30px;
+    animation:fall 3s linear forwards;
+}
+
+@keyframes fadeIn{
+    from{opacity:0}
+    to{opacity:1}
+}
+
+@keyframes fall{
+    to{
+        transform:translateY(100vh);
+        opacity:0;
+    }
+}
+
+.correct{
+    background:green;
+    color:white;
+}
+
+.wrong{
+    background:red;
+    color:white;
+}
+</style>
+</head>
+<body>
+
+<!-- الأصوات -->
+<audio id="clickSound" src="click.mp3"></audio>
+<audio id="correctSound" src="correct.mp3"></audio>
+<audio id="wrongSound" src="wrong.mp3"></audio>
+<audio id="kidsHi" src="kids_hi.mp3"></audio>
+
+<!-- الصفحة الأولى -->
+<div id="page1">
+<h1>STRUCTURAL LINGUISTICS</h1>
+<p class="names">by: Sabah — Asma — Khouloud — Bouchra — Zina — Melissa</p>
+<button onclick="nextPage('page2')">START →</button>
+</div>
+
+<!-- الصفحة الثانية -->
+<div id="page2" class="page">
+    <h3>girls here we will type our lesson + if u want to add pic or videos it's okay our lesson it gonna be like that 👇🏻👇</h3>
+<h2>Lesson: Notions of Structure</h2>
+<p><strong>Structure:</strong> The arrangement of signs in a language to create meaning.</p>
+<p><strong>Sign:</strong> A combination of the signifier (sound/image) and signified (concept).</p>
+<p><strong>Syntagm:</strong> A linear combination of signs that forms phrases or sentences.</p>
+<p><strong>Example:</strong> "The cat sleeps" — each word is a sign, combined in a syntagm.</p>
+
+<!-- أزرار Back و Next -->
+<div class="button-container">
+    <button class="exercise-button" onclick="backPage('page1')">← Back</button>
+    <button class="exercise-button" onclick="nextPage('page3')">Next →</button>
+</div>
+</div>
+
+<!-- الصفحة الثالثة -->
+<div id="page3" class="page">
+<h3>Exercise 1 — Choose the correct answer</h3>
+<p>Language is a system of:</p>
+<button class="exercise-button" onclick="checkAnswer(this,false)">Sounds</button>
+<button class="exercise-button" onclick="checkAnswer(this,true)">Signs</button>
+<button class="exercise-button" onclick="checkAnswer(this,false)">Words</button>
+
+<h3>Exercise 2 — True or False</h3>
+<p>Syntax studies sentence structure.</p>
+<button class="exercise-button" onclick="checkAnswer(this,true)">True</button>
+<button class="exercise-button" onclick="checkAnswer(this,false)">False</button>
+
+<h3>Exercise 3 — Choose the correct answer</h3>
+<p>A sign is composed of:</p>
+<button class="exercise-button" onclick="checkAnswer(this,true)">Signifier + Signified</button>
+<button class="exercise-button" onclick="checkAnswer(this,false)">Sound + Word</button>
+<button class="exercise-button" onclick="checkAnswer(this,false)">Sentence + Word</button>
+
+<!-- أزرار Back و Finish -->
+<div class="button-container">
+    <button class="exercise-button" onclick="backPage('page2')">← Back</button>
+    <button class="exercise-button" onclick="finishLesson()">Finish ✅</button>
+</div>
+</div>
+
+<script>
+function playClick(){document.getElementById("clickSound").play();}
+function nextPage(pageId){
+    playClick();
+    document.getElementById('page1').style.display='none';
+    document.getElementById('page2').style.display='none';
+    document.getElementById('page3').style.display='none';
+    document.getElementById(pageId).style.display='block';
+}
+function backPage(pageId){
+    playClick();
+    nextPage(pageId);
+}
+
+function confetti(){
+    for(let i=0;i<20;i++){
+        let c=document.createElement("div");
+        c.innerHTML="🎉";
+        c.className="confetti";
+        c.style.left=Math.random()*100+"vw";
+        document.body.appendChild(c);
+        setTimeout(()=>c.remove(),3000);
+    }
+}
+
+function checkAnswer(button,isCorrect){
+    playClick();
+    if(button.classList.contains("correct") || button.classList.contains("wrong")) return;
+
+    if(isCorrect){
+        button.classList.add("correct");
+        button.innerHTML+=" 🎉";
+        document.getElementById("correctSound").play();
+        document.getElementById("kidsHi").play();
+        confetti();
+    }else{
+        button.classList.add("wrong");
+        button.innerHTML+=" 😥";
+        document.getElementById("wrongSound").play();
+    }
+}
+
+function finishLesson(){
+    playClick();
+    confetti();
+    document.getElementById("correctSound").play();
+    document.getElementById("kidsHi").play();
+    document.getElementById('page3').innerHTML = `<h1 style="color:#ff0066; text-shadow: 2px 2px 6px black;">🎉 Congratulations! You finished the lesson! 🎉</h1>`;
+}
+</script>
+
+</body>
+</html>
