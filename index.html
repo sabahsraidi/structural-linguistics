@@ -7,27 +7,12 @@
 <style>
 body{
 margin:0;
-font-family:Arial;
+font-family:italic;
 text-align:center;
 overflow-x:hidden;
 }
 
-/* خلفية متحركة */
-body::before{
-content:"";
-position:fixed;
-width:200%;
-height:200%;
-background:linear-gradient(45deg,pink,#ff69b4,#ffc0cb);
-animation:bgMove 10s infinite linear;
-z-index:-1;
-}
 
-@keyframes bgMove{
-0%{transform:translate(0,0)}
-50%{transform:translate(-25%,-25%)}
-100%{transform:translate(0,0)}
-}
 
 /* الصفحات */
 .page{
@@ -42,7 +27,7 @@ display:flex;
 flex-direction:column;
 justify-content:center;
 align-items:center;
-color:white;
+color:pink;
 height:100vh;
 }
 
@@ -68,15 +53,15 @@ margin-top:10px;
 /* بوكس الأسماء */
 .names-box{
 background:white;
-padding:20px 40px;
+padding:40px 60px;
 margin-top:20px;
-border-radius:15px;
-box-shadow:0 8px 25px rgba(0,0,0,0.5);
+border-radius:20px;
+box-shadow:0 10px 30px rgba(0,0,0,0.5);
 }
 
 .names-box p{
-margin:8px;
-font-size:26px;
+margin:15px;
+font-size:30px;
 font-weight:bold;
 color:black;
 text-shadow:2px 2px 5px #ff69b4;
@@ -84,8 +69,8 @@ text-shadow:2px 2px 5px #ff69b4;
 
 /* الأزرار */
 button{
-padding:14px 28px;
-font-size:20px;
+padding:20px 30px;
+font-size:30px;
 border:none;
 border-radius:10px;
 cursor:pointer;
